@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAGify — AI PDF Chat Assistant</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="panel">
+
+        <!-- Brand -->
+        <div class="brand">
+
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0" y1="0" x2="24" y2="24">
+                            <stop offset="0%" stop-color="#8B5CF6"/>
+                            <stop offset="100%" stop-color="#06B6D4"/>
+                        </linearGradient>
+                    </defs>
+
+                    <path
+                        d="M12 2L21 7V17L12 22L3 17V7L12 2Z"
+                        stroke="url(#logoGradient)"
+                        stroke-width="2"
+                    />
+
+                    <path
+                        d="M8 12H16M12 8V16"
+                        stroke="url(#logoGradient)"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+            </div>
+
+            <div class="brand-content">
+                <div class="brand-name">
+                    RAG<span>ify</span>
+                </div>
+
+                <div class="brand-subtitle">
+                    AI Powered PDF Intelligence
+                </div>
+            </div>
+
+            <span class="brand-tag">v2.0</span>
+
+        </div>
+
+        <!-- Hero Badge -->
+
+        <div class="hero-badge">
+            ✨ Retrieval Augmented Generation Platform
+        </div>
+
+        <!-- Upload Section -->
+
+        <p class="section-label">
+            Upload PDF Document
+        </p>
+
+        <div class="upload-zone" id="uploadZone">
+            <input
+                type="file"
+                id="fileInput"
+                accept=".pdf"
+            >
+            <div class="doc-icon-wrap">
+
+                <svg class="doc-icon-svg"
+                     viewBox="0 0 52 64"
+                     fill="none">
+
+                    <rect
+                        x="1"
+                        y="1"
+                        width="50"
+                        height="62"
+                        rx="6"
+                    />
+
+                    <path d="M32 1v14h14"/>
+
+                    <path
+                        d="M10 28h32M10 35h32M10 42h20"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+                <div
+                    class="scanner-line"
+                    id="scannerLine">
+                </div>
+
+            </div>
+
+            <p class="upload-title" id="uploadTitle">
+                Upload Your PDF
+            </p>
+
+            <p class="upload-sub" id="uploadSub">
+                Drag & Drop or Click to Browse
+            </p>
+
+            <span class="upload-badge">
+                PDF • RAG Ready
+            </span>
+
+        </div>
+
+        <!-- Index Button -->
+
+        <button
+            class="btn-index"
+            id="btnIndex"
+            disabled>
+
+            <svg width="15"
+                 height="15"
+                 viewBox="0 0 14 14"
+                 fill="none">
+
+                <circle
+                    cx="7"
+                    cy="7"
+                    r="6"
+                    stroke="white"
+                    stroke-width="1.2"
+                />
+
+                <path
+                    d="M4.5 7l2 2 3-3"
+                    stroke="white"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+            Build Vector Index
+
+        </button>
+
+        <!-- Progress -->
+
+        <div
+            class="progress-wrap"
+            id="progressWrap">
+
+            <div class="progress-track">
+                <div
+                    class="progress-fill"
+                    id="progressFill">
+                </div>
+            </div>
+
+            <p
+                class="progress-label"
+                id="progressLabel">
+
+                Preparing Document...
+
+            </p>
+
+        </div>
+
+        <!-- Document Info -->
+
+        <div
+            class="doc-info"
+            id="docInfo">
+
+            <div class="doc-info-name">
+
+                <span class="dot"></span>
+
+                <span id="docInfoName">
+                    No File Selected
+                </span>
+
+            </div>
+
+            <div class="doc-info-meta">
+
+                <span
+                    class="meta-pill"
+                    id="docChunks">
+
+                    0 Chunks
+
+                </span>
+
+                <span class="meta-pill">
+                    Chroma DB
+                </span>
+
+                <span class="meta-pill">
+                    Mistral AI
+                </span>
+
+                <span class="meta-pill">
+                    MMR Search
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- Reset -->
+
+        <button
+            class="reset-btn"
+            id="btnReset">
+
+            🚀 Load New Document
+
+        </button>
+
+        <!-- Pipeline -->
+
+        <div class="pipeline">
+
+            <p class="pipeline-title">
+                RAG Pipeline
+            </p>
+
+            <div class="pipeline-steps">
+
+                <div class="step">
+                    <div class="step-dot">1</div>
+                    <span>PDF Loader</span>
+                </div>
+
+                <div class="step-connector"></div>
+
+                <div class="step">
+                    <div class="step-dot">2</div>
+                    <span>Text Chunking</span>
+                </div>
+
+                <div class="step-connector"></div>
+
+                <div class="step">
+                    <div class="step-dot">3</div>
+                    <span>Embeddings</span>
+                </div>
+
+                <div class="step-connector"></div>
+
+                <div class="step">
+                    <div class="step-dot">4</div>
+                    <span>Vector Store</span>
+                </div>
+
+                <div class="step-connector"></div>
+
+                <div class="step">
+                    <div class="step-dot">5</div>
+                    <span>AI Response</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- =========================================
+         CHAT AREA
+    ========================================== -->
+
+    <main class="chat-panel">
+
+        <!-- Top Bar -->
+
+        <div class="chat-topbar">
+
+            <div
+                class="topbar-status"
+                id="topbarStatus">
+            </div>
+
+            <p
+                class="topbar-label"
+                id="topbarLabel">
+
+                <strong>
+                    RAGify Assistant Ready
+                </strong>
+
+            </p>
+
+            <span class="topbar-model">
+                ⚡ Mistral + Chroma + RAG
+            </span>
+
+        </div>
+
+        <!-- Welcome Screen -->
+
+        <div
+            class="empty-state"
+            id="emptyState">
+
+            <div class="hero-logo">
+
+    <div class="logo-ring">
+
+        <svg class="logo-svg" viewBox="0 0 100 100" fill="none">
+
+            <!-- Document -->
+            <path
+                d="M35 20H58L70 32V75H35V20Z"
+                stroke="url(#grad)"
+                stroke-width="4"
+                stroke-linejoin="round"
+            />
+
+            <path
+                d="M58 20V32H70"
+                stroke="url(#grad)"
+                stroke-width="4"
+            />
+
+            <!-- Chat Bubble -->
+            <circle
+                cx="65"
+                cy="58"
+                r="13"
+                stroke="url(#grad)"
+                stroke-width="4"
+            />
+
+            <circle cx="60" cy="58" r="2" fill="#7C6BFF"/>
+            <circle cx="65" cy="58" r="2" fill="#7C6BFF"/>
+            <circle cx="70" cy="58" r="2" fill="#7C6BFF"/>
+
+            <defs>
+                <linearGradient id="grad" x1="0" y1="0" x2="100" y2="100">
+                    <stop offset="0%" stop-color="#8B5CF6"/>
+                    <stop offset="100%" stop-color="#06B6D4"/>
+                </linearGradient>
+            </defs>
+
+        </svg>
+
+    </div>
+
+</div>
+
+<h1 class="empty-title">
+    Welcome to
+    <span class="rag-text">
+        RAG<span class="ify-text">ify</span>
+    </span>
+</h1>
+
+            <p class="empty-sub">
+
+                Upload a PDF, build a vector index,
+                and chat with your document using
+                Retrieval Augmented Generation.
+
+            </p>
+
+        </div>
+
+        <!-- Messages -->
+
+        <div
+            class="messages"
+            id="messages">
+        </div>
+
+        <!-- Features -->
+
+        <div class="feature-strip">
+
+            <div class="feature-card">
+                📄 PDF Understanding
+            </div>
+
+            <div class="feature-card">
+                🧠 Mistral AI
+            </div>
+
+            <div class="feature-card">
+                🔍 Semantic Search
+            </div>
+
+            <div class="feature-card">
+                ⚡ Instant Answers
+            </div>
+
+        </div>
+
+        <!-- Chat Input -->
+
+        <div class="chat-input-row">
+
+            <textarea
+                class="chat-input"
+                id="chatInput"
+                rows="1"
+                disabled
+                placeholder="Ask anything about your document...">
+            </textarea>
+
+            <button
+                class="btn-send"
+                id="btnSend"
+                disabled>
+
+                <svg
+                    viewBox="0 0 18 18"
+                    fill="none">
+
+                    <path
+                        d="M2 9h14M9 3l6 6-6 6"
+                        stroke="white"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                </svg>
+
+            </button>
+
+            <button
+                class="btn-end"
+                id="btnEnd">
+                End Chat
+            </button>
+        </div>
+
+        <p
+            class="input-hint"
+            id="inputHint">
+
+            Upload and index a PDF to start chatting with your knowledge base
+
+        </p>
+
+    </main>
+
+</div>
+
+<!-- Toast -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script src="/static/js/app.js"></script>
+
+</body>
+</html>
