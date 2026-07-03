@@ -1,8 +1,12 @@
 # 🚀 RAGify - AI Powered PDF Chat Assistant
+<img width="1356" height="601" alt="Screenshot 2026-07-03 143650" src="https://github.com/user-attachments/assets/f5e3f17a-295c-4455-8f18-f0c4f287cf53" />
+
 
 RAGify is a Retrieval-Augmented Generation (RAG) application that allows users to upload PDF documents and interact with them using natural language. The system retrieves relevant document chunks using semantic search and generates accurate answers using Mistral AI.
 
 ---
+<img width="1356" height="602" alt="Screenshot 2026-07-03 143545" src="https://github.com/user-attachments/assets/ecc72529-de3f-41c4-bc89-2aa7f063601d" />
+
 
 ## ✨ Features
 
