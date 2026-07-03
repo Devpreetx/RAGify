@@ -147,21 +147,6 @@ http://localhost:5000
 
 ---
 
-## 📸 Screenshots
-
-Add screenshots of:
-- Upload Interface
-- Chat Interface
-- PDF Processing
-
-Example:
-
-```md
-![Home Page](screenshots/home.png)
-```
-
----
-
 ## 🚀 Future Improvements
 
 - Multiple PDF support
@@ -178,7 +163,7 @@ Example:
 **Devpreet Singh**
 
 - GitHub: https://github.com/Devpreetx
-- LinkedIn: Add your LinkedIn profile
+- LinkedIn: https://www.linkedin.com/in/devpreet-singh-33018a318
 
 ---
 
